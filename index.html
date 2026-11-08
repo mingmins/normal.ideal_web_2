@@ -522,24 +522,28 @@ const specimenPositions = [
 const specimenData = [
   {
     category:'Lips', title:'Expansion & Emphasis', short:'Lips',
+    sideLabels:['둘레의 확장','두께의 확장'],
     description:'입술의 크기와 부피를 변화시키는 방식에서 확장과 강조의 원리를 도출한다. 무르시족의 입술 접시 문화는 곡선 반경과 궤적을 바깥으로 확장하는 방식으로, 현대의 입술 필러는 둥근 획의 무게 중심을 부풀리는 방식으로 표현된다.',
     names:['Lip Shape','Mursi','Lip Fillers'],
     ko:['입술의 기본 형태\n곡선과 속공간의 기본 형태','무르시족의 입술 접시 문화\n곡선의 연장과 둘레의 확장','입술 필러 시술의 입술 변형\n획의 팽창과 속공간의 축소']
   },
   {
     category:'Tooth', title:'Reconstruction & Realignment', short:'Tooth',
+    sideLabels:['깎기','깎고 덧씌우기'],
     description:'치아의 형태를 깎아내거나 덧씌워 재구성하는 방식에서 조형 원리를 도출한다. 멘타와이족의 치아 연마 문화는 외곽을 깎아 날카로운 각을 형성하고, 라미네이트는 형태를 덧씌우고 정돈하여 균일한 구조로 재정렬한다.',
     names:['Tooth Shape','Mentawai','Dental Veneer'],
     ko:['치아의 기본 형태\n변형 이전의 자연스러운 형태와 배열','멘타와이족의 치아 연마 문화\n획의 절삭과 날카로운 각의 형성','라미네이트 시술의 치아 변형\n외곽의 재구성과 균일한 정렬']
   },
   {
     category:'Neck/Waist', title:'Distortion & Compression', short:'Neck/Waist',
+    sideLabels:['길이의 왜곡','폭의 왜곡'],
     description:'신체에 가해지는 압력으로 길이와 폭이 변화하는 현상을 글자의 비례에 적용한다. 카얀족의 황동 목 링은 세로 방향의 연장으로, 코르셋은 중심부의 압축과 수축으로 번역하여 기존 글자 구조의 균형을 변화시킨다.',
     names:['Neck/Waist\nShape','Kayan','Corset'],
     ko:['목과 허리의 기본 구조\n길게 뻗은 수직적 비례','카얀족의 목 링 문화\n곡선의 종횡과 길이의 왜곡','코르셋 문화\n중심부의 압축과 폭의 수축']
   },
   {
     category:'Skull/Face', title:'Structural Transformation', short:'Skull/Face',
+    sideLabels:['골격의 연장','골격의 절삭'],
     description:'두개골과 안면골격의 형태를 변화시키는 방식에서 글자의 구조적 변형을 도출한다. 망베투족의 리폼보 문화는 중심축과 길이를 사선 방향으로 연장하고, 안면윤곽수술은 획의 일부를 절삭하고 재구성한다.',
     names:['Facial\nStructure','Mangbetu','Facial\nContouring'],
     ko:['안면 골격의 기본 구조\n곡선과 직선이 이루는 기본 골격','망베투족의 리폼보\n중심축의 이동과 골격의 연장','안면윤곽수술\n획의 절삭과 구조의 재구성']
@@ -570,7 +574,7 @@ $('specimen-sections').innerHTML = specimenData.map((d,c) => `
         <p class="spec-description">${d.description}</p>
         <span class="spec-glyph" id="spec-glyph-${c}" aria-hidden="true">a</span>
         <div class="spec-side-labels" aria-hidden="true">
-          <span>Basic</span><span>문화의 확장</span><span>두께의 확장</span>
+          <span>Basic</span><span>${d.sideLabels[0]}</span><span>${d.sideLabels[1]}</span>
         </div>
       </div>
     </div>
