@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Google Fonts: 모든 기기에서 Noto Sans Mono를 동일하게 불러옵니다. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet">
 <title>Normal / Ideal — Type Specimen</title>
 
 <style>
@@ -61,7 +65,7 @@ body:not(.is-home) .try { display: none; }
 .mark.selected:after{height:3px;top:4px}
 
 /* ───────── 좌측 하단: 선택한 서체 ───────── */
-.selection{position:fixed;left:10px;bottom:4.3vh;width:290px;text-align:center}
+.selection{position:fixed;left:0px;bottom:4.3vh;width:290px;text-align:center}
 #style-label{font-size:18px;white-space:nowrap}
 .tabs{display:flex;justify-content:center;gap:24px;margin-top:12px}
 
@@ -104,10 +108,10 @@ body:not(.is-home) .try { display: none; }
 
 /* ───────── 타이핑 영역 ───────── */
 .editor{
-  position: fixed; top: 3vh; left: 300px; right: 5vw; bottom: 0vh;
+  position: fixed; top: 3vh; left: 350px; right: 5vw; bottom: 0vh;
   width: auto;
   border: 0; outline: 0; resize: none; 
-  padding-left: 100px;
+  padding-left: 150px;
 
 
   background: transparent; color: #000;
@@ -143,7 +147,8 @@ dialog p{font:12px/1.8 Arial,sans-serif;color:#666}
 
 /* ───────── 반응형 ───────── */
 @media(min-width:1600px){
-  .categories,.selection{left:2vw}
+  .categories{left:2vw}
+  .selection{left:calc(2vw - 45px)}
 }
 @media(max-height:650px) and (min-width:701px){
   .categories{top:110px;gap:14px}
@@ -395,6 +400,94 @@ transform: translateX(2vw);
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
 
+
+/* ═════════ 데스크톱 왼쪽 패널: 로고/카테고리/폰트/슬라이더 공통 중심축 ═════════ */
+@media (min-width: 701px) {
+  :root {
+    --left-panel-x: 2vw;
+    --left-panel-width: 250px;
+  }
+
+  .logo {
+    left: var(--left-panel-x);
+    width: var(--left-panel-width);
+  }
+  .logo img {
+    width: 100%;
+  }
+
+  .categories {
+    left: var(--left-panel-x);
+    width: var(--left-panel-width);
+  }
+
+  .selection {
+    left: var(--left-panel-x);
+    width: var(--left-panel-width);
+  }
+
+  .bottom-controls {
+    width: 100%;
+    align-items: center;
+  }
+}
+
+
+/* ═════════ 24인치 iMac 등 데스크톱: 왼쪽 패널 확대 ═════════
+   기존 공통 중심축을 유지하면서 패널 구성 요소를 함께 키웁니다.
+   타이핑 본문(.editor) 및 모바일 레이아웃은 변경하지 않습니다. */
+@media (min-width: 701px) {
+  :root {
+    --left-panel-width: clamp(300px, 20vw, 350px);
+  }
+
+  .logo { width: var(--left-panel-width); }
+  .logo img { width: 100%; }
+
+  .categories {
+    width: var(--left-panel-width);
+    top: 19vh;
+    gap: 30px;
+  }
+  .category-main {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+  .marks {
+    height: 17px;
+    padding: 0 39px;
+  }
+  .mark {
+    width: 21px;
+    height: 17px;
+  }
+  .mark::after { top: 8px; }
+  .mark.selected::after { top: 7px; }
+
+  .selection {
+    width: var(--left-panel-width);
+    bottom: 5vh;
+  }
+  .selection h1,
+  .selection h1.long-name {
+    font-size: 44px;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  #style-label { font-size: 22px; }
+  .tabs { margin-top: 16px; gap: 30px; }
+
+  .bottom-controls {
+    margin-top: 36px;
+    gap: 19px;
+  }
+  .bottom-controls input[type="range"] { width: 260px; }
+  .bottom-controls input[type="range"]::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 </style>
 </head>
 
@@ -406,8 +499,9 @@ transform: translateX(2vw);
   <button class="home-diagram" id="home-diagram" aria-label="서체 분류 살펴보기">
     <img src="main-name.png" alt="Font Diagram">
   </button>
-  <button class="home-down" id="home-down" aria-label="서체 소개 아래로 이동"><svg viewBox="0 0 52 18" aria-hidden="true"><path d="M1 1 L26 12 L51 1" fill="none" stroke="currentColor" stroke-width="1"/></svg></button>
+  <button class="home-down" id="home-down" aria-label="서체 소개 아래로 이동"><svg viewBox="0 0 52 18" aria-hidden="true"><path d="M1 1 L26 12 L51 1" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
 </section>
+
 
 <!-- ═════════ 타이핑 화면 ═════════ -->
 <button class="logo" id="home" aria-label="처음 화면">
@@ -430,7 +524,7 @@ transform: translateX(2vw);
   
   <div class="bottom-controls">
     <label>
-      <input id="size" type="range" min="32" max="300" value="190" aria-label="글자 크기 조절">
+      <input id="size" type="range" min="32" max="500" value="190" aria-label="글자 크기 조절">
     </label>
     <label>
       <input id="lineheight" type="range" min="0.5" max="3.0" step="0.05" value="1.18" aria-label="행간 조절">
@@ -743,17 +837,16 @@ document.querySelectorAll('[data-style]').forEach(b => {
    홈 ↔ 타이핑 화면
    ═══════════════════════════════════════════ */
 function showPage() {
-  
   const typing = location.hash === '#type';
   document.body.classList.toggle('is-home', !typing);
   $('home-screen').hidden = typing;
   $('showcase').hidden = typing;
+
   if (typing) {
     window.scrollTo(0, 0);
     chosen = true;
     render();
   } else {
-    // 홈/목차/특정 섹션의 해시 접근도 지원
     const targetId = location.hash.slice(1);
     const target = targetId && document.getElementById(targetId);
     requestAnimationFrame(() => {
@@ -762,6 +855,7 @@ function showPage() {
     });
   }
 }
+
 function openTyping() {
   if (location.hash !== '#type') location.hash = 'type';
   else showPage();
